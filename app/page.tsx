@@ -1,3 +1,4 @@
+import DemoVideo from './demo-video';
 import Link from 'next/link';
 import {
   ArrowDown,
@@ -288,15 +289,16 @@ export default function Home() {
         </section>
         <section id="walkthrough" className="walkthrough-section">
           <div>
-            <span className="eyebrow">04 / TWO MINUTES, THIRTY SECONDS</span>
+            <span className="eyebrow">04 / THE COMPLETE APP WALKTHROUGH</span>
             <h2>
               See a failure.
               <br />
               Understand the fix.
             </h2>
             <p>
-              A narrated, captioned walkthrough of computed replay reports and
-              onchain receipts.
+              The actual app, with a guiding cursor, narration and captions.
+              Follow every step from a failed replay to live receipt
+              verification.
             </p>
             <a
               className="text-link"
@@ -305,17 +307,7 @@ export default function Home() {
               Read the code <ArrowUpRight size={18} />
             </a>
           </div>
-          <video
-            controls
-            preload="metadata"
-            poster="/demo/replay-report.png"
-            aria-label="WindTunnel narrated project walkthrough"
-          >
-            <source
-              src="/demo/windtunnel-demo.mp4?v=voiceover-1"
-              type="video/mp4"
-            />
-          </video>
+          <DemoVideo />
         </section>
         <section className="final-cta">
           <span className="stamp">OPEN SOURCE. TESTNET VERIFIED.</span>

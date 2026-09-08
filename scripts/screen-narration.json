@@ -1,0 +1,56 @@
+[
+  {
+    "start": 0,
+    "end": 12,
+    "title": "The problem",
+    "text": "This is WindTunnel: a crash-testing lab for DreamDEX Event Contract bots. A correct prediction can still become a broken trade. Let's use the actual app to find out why."
+  },
+  {
+    "start": 12,
+    "end": 40,
+    "title": "Partial fills and the repair",
+    "text": "We start with ten requested contracts and only three available. Watch the cursor as I run the comparison. Both implementations receive identical events. The reference records ten contracts, while the repaired bot records the three confirmed fills. The independent oracle flags the mismatch. Scroll down to see the repair: credit actual fills, then track the unfilled remainder separately."
+  },
+  {
+    "start": 40,
+    "end": 58,
+    "title": "Change the inputs",
+    "text": "Now I change available liquidity to ten and run the same scenario. This time the entire order fills, and both bots pass. The result is computed from the inputs. Testing only a fully filled order would hide the accounting bug."
+  },
+  {
+    "start": 58,
+    "end": 78,
+    "title": "Market rollover",
+    "text": "Next is market rollover. A pool is reused for a successor window, but the reference keeps the old market identity. After execution, its window is A while the correct window is B. The repaired implementation refreshes the binding instead of treating the pool address as permanent identity."
+  },
+  {
+    "start": 78,
+    "end": 106,
+    "title": "Crash and redemption recovery",
+    "text": "The recovery scenario exposes a different failure. A redemption is broadcast, the process crashes, and a receipt is delivered again after restart. The reference credits too early and repeats the credit, ending at thirty units. The repaired bot waits for confirmation and records the receipt once, ending at ten. Jump to the first failure to see exactly when the ledger first diverged."
+  },
+  {
+    "start": 106,
+    "end": 124,
+    "title": "Reproduce and share",
+    "text": "Run all three scenarios together to inspect the whole suite. Share replay creates a link that restores the active inputs and selected event. Export report downloads the actual event tape and ledgers with a SHA two fifty-six integrity hash, ready for debugging."
+  },
+  {
+    "start": 124,
+    "end": 149,
+    "title": "Real onchain evidence",
+    "text": "These scenarios are synthetic. Here is the real testnet evidence. Recorded payouts match: one test U S D C for the owner, two for the maker. Now I verify the receipts against the public Somnia RPC. This checks the status and block number of all eight recorded transactions, spanning minting, order placement, taking liquidity, cancellation, and redemption."
+  },
+  {
+    "start": 149,
+    "end": 158,
+    "title": "Inspectable transactions",
+    "text": "All eight receipts match. Each links to the explorer. We verified recorded transactions, without submitting a new trade."
+  },
+  {
+    "start": 158,
+    "end": 178,
+    "title": "Build on WindTunnel",
+    "text": "The integration guide shows how to run the same engine locally and test your own trusted strategy reducer. Seventeen automated tests cover the engine and replay links. WindTunnel is open source, with documented limits and SDK feedback. Reproduce the failure. Inspect the repair. Verify the evidence."
+  }
+]

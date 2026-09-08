@@ -1,51 +1,46 @@
-# 2:30 narrated and captioned report walkthrough
+# WindTunnel — 2:58 full-HD app walkthrough
 
-The generated MP4 visualizes actual engine outputs and recorded receipts. It is not a screen recording of browser interaction. An optional live presentation can follow the same sequence in the app.
+Recorded from the actual browser UI at 1920 × 1080 with real mouse actions. The highlighted presentation cursor follows those mouse events. No application results or network responses are mocked. Narration is synthetic (Microsoft Guy Neural), synchronized to the capture, with word-timed captions.
 
-0:00–0:14 — A bot can predict correctly and still operate incorrectly. Explain WindTunnel's execution focus.
+The onchain segment rechecks existing transaction receipts live; it does not submit a new trade or show MetaMask approvals.
 
-0:14–0:52 — Partial-fill replay, event by event: request 10, fill 3, record 10 incorrectly, cancel 7. Compare repaired bookkeeping.
+## 0:00 — The problem
 
-0:52–1:10 — Change liquidity to 10. Both references now pass. Results respond to inputs.
+This is WindTunnel: a crash-testing lab for DreamDEX Event Contract bots. A correct prediction can still become a broken trade. Let's use the actual app to find out why.
 
-1:10–1:34 — Replay pool reuse and reveal stale execution identity. Refreshing the binding fixes it.
+## 0:12 — Partial fills and the repair
 
-1:34–2:02 — Interrupt confirmation, restart, redeliver a receipt. Credit only a confirmed receipt, once.
+We start with ten requested contracts and only three available. Watch the cursor as I run the comparison. Both implementations receive identical events. The reference records ten contracts, while the repaired bot records the three confirmed fills. The independent oracle flags the mismatch. Scroll down to see the repair: credit actual fills, then track the unfilled remainder separately.
 
-2:02–2:23 — Show actual testnet receipt hashes and lifecycle status. Clearly disclose the controlled two-wallet fixture.
+## 0:40 — Change the inputs
 
-2:23–2:30 — Local reproduction commands, repository, and the scope limitation.
+Now I change available liquidity to ten and run the same scenario. This time the entire order fills, and both bots pass. The result is computed from the inputs. Testing only a fully filled order would hide the accounting bug.
 
-## Voiceover transcript
+## 0:58 — Market rollover
 
-Synthetic narration: Microsoft Guy Neural (en-US). Captions remain visible in the video.
+Next is market rollover. A pool is reused for a successor window, but the reference keeps the old market identity. After execution, its window is A while the correct window is B. The repaired implementation refreshes the binding instead of treating the pool address as permanent identity.
 
-### 0:00–0:14
+## 1:18 — Crash and redemption recovery
 
-A correct prediction can still become a broken trade. WindTunnel crash-tests the execution behind DreamDEX bots, so you can reproduce a failure, understand it, and verify the repair.
+The recovery scenario exposes a different failure. A redemption is broadcast, the process crashes, and a receipt is delivered again after restart. The reference credits too early and repeats the credit, ending at thirty units. The repaired bot waits for confirmation and records the receipt once, ending at ten. Jump to the first failure to see exactly when the ledger first diverged.
 
-### 0:14–0:52
+## 1:46 — Reproduce and share
 
-Start with the phantom position. Both bots receive the same synthetic event tape: an order for ten contracts, but only three contracts actually fill. The reference bot mistakes the requested quantity for an owned position. Its ledger says ten. The repaired bot records the confirmed fill, so its position is three. When the remaining seven contracts are cancelled, the repaired ledger stays consistent. An independent oracle checks the expected state at every step, showing exactly where the reference implementation goes wrong.
+Run all three scenarios together to inspect the whole suite. Share replay creates a link that restores the active inputs and selected event. Export report downloads the actual event tape and ledgers with a SHA two fifty-six integrity hash, ready for debugging.
 
-### 0:52–1:10
+## 2:04 — Real onchain evidence
 
-These results are computed, not hard-coded. Change available liquidity to ten and run the comparison again. Now the whole order fills, and both implementations pass. You can adjust the inputs, replay each event, and export the report.
+These scenarios are synthetic. Here is the real testnet evidence. Recorded payouts match: one test U S D C for the owner, two for the maker. Now I verify the receipts against the public Somnia RPC. This checks the status and block number of all eight recorded transactions, spanning minting, order placement, taking liquidity, cancellation, and redemption.
 
-### 1:10–1:34
+## 2:29 — Inspectable transactions
 
-Next, market rollover. An event window ends, and the same pool is reused for a successor market. A bot that treats the pool address as a permanent identity can execute against a stale market. The repair refreshes the market binding before execution, then checks it against the current snapshot.
+All eight receipts match. Each links to the explorer. We verified recorded transactions, without submitting a new trade.
 
-### 1:34–2:02
+## 2:38 — Build on WindTunnel
 
-Finally, recovery. Broadcasting a redemption is not the same as confirming it. The reference bot credits the balance too early. After a crash and restart, a repeated receipt can credit it again. The repaired implementation waits for confirmation and records each receipt only once. Replaying the same event therefore leaves the ledger unchanged. The oracle makes both premature credit and duplicate credit visible.
+The integration guide shows how to run the same engine locally and test your own trusted strategy reducer. Seventeen automated tests cover the engine and replay links. WindTunnel is open source, with documented limits and SDK feedback. Reproduce the failure. Inspect the repair. Verify the evidence.
 
-### 2:02–2:23
+## Reproduce the video
 
-The synthetic scenarios are separate from real integration evidence. On Somnia Shannon, the recorded run mints, places, takes, cancels, and redeems through DreamDEX. Two controlled fixture wallets are used. Every receipt is inspectable, and the final token balance changes reconcile with the expected payouts.
+Install Playwright in the ignored `work/video-tools` folder, use the installed Edge browser, and install Playwright’s FFmpeg encoder. Run `node scripts/record_demo.cjs`, then `python scripts/build_screen_demo.py` with edge-tts 7.2.8 and imageio-ffmpeg installed. Captured API results, screenshots and timing metadata stay under ignored `work/screen-demo`. The final MP4 and poster live under `public/demo`.
 
-### 2:23–2:30
-
-Break your bot here. Fix it before going live. WindTunnel.
-
-To regenerate: run `scripts/render_demo.py`, then `scripts/narrate_demo.py` with Python, Pillow, imageio-ffmpeg and edge-tts 7.2.8 installed. The narration script sends only the public script text to the speech service and checks each segment fits its scene.

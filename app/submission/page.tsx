@@ -1,3 +1,4 @@
+import DemoVideo from '../demo-video';
 import Link from 'next/link';
 import Evidence from '../evidence';
 export default function Submission() {
@@ -63,22 +64,12 @@ export default function Submission() {
       </section>
       <Evidence />
       <section className="panel prose">
-        <h2>2:30 project walkthrough</h2>
+        <h2>2:58 full-HD app walkthrough</h2>
         <p>
-          A narrated, captioned visualization of actual replay reports and
-          testnet receipts.
+          A full-screen recording of the actual app: replay controls, repairs,
+          report sharing and live verification of recorded testnet receipts.
         </p>
-        <video
-          controls
-          preload="metadata"
-          style={{ width: '100%', borderRadius: 8 }}
-          aria-label="WindTunnel narrated report walkthrough"
-        >
-          <source
-            src="/demo/windtunnel-demo.mp4?v=voiceover-1"
-            type="video/mp4"
-          />
-        </video>
+        <DemoVideo />
         <p>
           Captions are included in the video. See DEMO_SCRIPT.md in the
           repository for the text outline.
