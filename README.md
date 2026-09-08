@@ -2,6 +2,8 @@
 
 **Reproduce an Event Contract integration failure, inspect the repair, and verify the lifecycle on Somnia Shannon.**
 
+**[Live demo](https://windtunnel-silk.vercel.app) · [Replay lab](https://windtunnel-silk.vercel.app/lab) · [Evidence and video](https://windtunnel-silk.vercel.app/submission)**
+
 Repository: https://github.com/Nakshatra05/windtunnel
 
 Built for the Somnia × DreamDEX Event Contracts Hackathon. The landing page introduces the project; `/lab` opens the deterministic replay lab and `/submission` contains the project brief, walkthrough and real transaction trail.
