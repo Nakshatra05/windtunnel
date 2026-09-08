@@ -1,0 +1,49 @@
+{
+  "schema": "windtunnel.lifecycle.v1",
+  "provenance": "controlled-testnet-fixture",
+  "chainId": 50312,
+  "sdk": "0.28.1",
+  "createdAt": "2026-09-08T19:08:16.200Z",
+  "owner": "0xF619dDB6d0c52Cc083aA9FECe2943D04F671Bf7F",
+  "maker": "0x1D105dCE91D008fE978B4b5c5938fB5775b7830d",
+  "market": {
+    "marketId": "0x0000000000000000000000000000000000000000000000000000000000017457",
+    "pool": "0x977FfC6129184D2B8311cc8D025a60369bf7059C",
+    "asset": "BTC",
+    "expiry": "2026-09-08T19:15:00.000Z",
+    "status": 1,
+    "intervalSec": 900
+  },
+  "marketState": {
+    "marketAddress": "0x5f6Ec7c1d10ce9B1Af9884F25a7a920D94eFb89d",
+    "outcomeToken": "0xB52c5934113Af5c0Bb20eb3C72290C8215f755b9",
+    "yesId": "4084430430699711941661172540721307390542943882180056147836640061040896",
+    "noId": "4084430430699711941661172540721307390542943882180056147836640061040897",
+    "pool": "0x977FfC6129184D2B8311cc8D025a60369bf7059C",
+    "nonce": "41",
+    "collateral": "0x70a86D8842FB63C4Ad2b7cdddF530eBf1BB25d8E",
+    "status": 1,
+    "backing": "1500000000",
+    "finalized": false,
+    "expiry": "1788894900",
+    "decimals": 6,
+    "winningOutcome": 0,
+    "isResolved": false,
+    "isVoided": false
+  },
+  "before": {
+    "native": "50000000000000000000",
+    "collateral": "500000000"
+  },
+  "steps": [
+    {
+      "action": "fund-fixture-maker-STT",
+      "hash": "0xa865126e26beb7b491da38c6e6f3e56b9817c966c816eaf7c1861a0200b0e9f3",
+      "block": "483212972",
+      "status": "reverted",
+      "gasUsed": "210000"
+    }
+  ],
+  "state": "needs-recovery",
+  "error": "fund-fixture-maker-STT reverted; evidence saved."
+}

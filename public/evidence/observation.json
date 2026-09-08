@@ -1,0 +1,60 @@
+{
+  "schema": "windtunnel.observation.v1",
+  "provenance": "live-testnet-read",
+  "observedAt": "2026-09-08T19:06:10.632Z",
+  "chainId": 50312,
+  "block": "483211623",
+  "source": "https://dream-rpc.somnia.network",
+  "scanBlocks": 40000,
+  "failedRanges": 0,
+  "markets": [
+    {
+      "marketId": "0x0000000000000000000000000000000000000000000000000000000000017467",
+      "pool": "0x1A939A62608D6c93C4d794298D0517D0c88aC2c7",
+      "asset": "BTC",
+      "expiry": "2026-09-08T19:10:00.000Z",
+      "status": 1,
+      "intervalSec": 300
+    },
+    {
+      "marketId": "0x0000000000000000000000000000000000000000000000000000000000017468",
+      "pool": "0xcBC7a87Ae840401AD2A9d0233C4Da51a7fa14165",
+      "asset": "ETH",
+      "expiry": "2026-09-08T19:10:00.000Z",
+      "status": 1,
+      "intervalSec": 300
+    },
+    {
+      "marketId": "0x0000000000000000000000000000000000000000000000000000000000017455",
+      "pool": "0x1f44b95Cd54a2b4dD5244830b256ee14b8A1F942",
+      "asset": "BTC",
+      "expiry": "2026-09-08T20:00:00.000Z",
+      "status": 1,
+      "intervalSec": 3600
+    },
+    {
+      "marketId": "0x0000000000000000000000000000000000000000000000000000000000017456",
+      "pool": "0x9887d318fFd0e385E6d3113ef78b9a664AB4d0CB",
+      "asset": "ETH",
+      "expiry": "2026-09-08T20:00:00.000Z",
+      "status": 1,
+      "intervalSec": 3600
+    },
+    {
+      "marketId": "0x0000000000000000000000000000000000000000000000000000000000017457",
+      "pool": "0x977FfC6129184D2B8311cc8D025a60369bf7059C",
+      "asset": "BTC",
+      "expiry": "2026-09-08T19:15:00.000Z",
+      "status": 1,
+      "intervalSec": 900
+    },
+    {
+      "marketId": "0x0000000000000000000000000000000000000000000000000000000000017458",
+      "pool": "0x276f5834C407b5B1d1De943dEf367f33E33f6E3C",
+      "asset": "ETH",
+      "expiry": "2026-09-08T19:15:00.000Z",
+      "status": 1,
+      "intervalSec": 900
+    }
+  ]
+}

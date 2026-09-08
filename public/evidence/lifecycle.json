@@ -1,0 +1,148 @@
+{
+  "schema": "windtunnel.lifecycle.v1",
+  "provenance": "controlled-testnet-fixture",
+  "chainId": 50312,
+  "sdk": "0.28.1",
+  "createdAt": "2026-09-08T19:09:29.665Z",
+  "owner": "0xF619dDB6d0c52Cc083aA9FECe2943D04F671Bf7F",
+  "maker": "0x1D105dCE91D008fE978B4b5c5938fB5775b7830d",
+  "market": {
+    "marketId": "0x0000000000000000000000000000000000000000000000000000000000017457",
+    "pool": "0x977FfC6129184D2B8311cc8D025a60369bf7059C",
+    "asset": "BTC",
+    "expiry": "2026-09-08T19:15:00.000Z",
+    "status": 1,
+    "intervalSec": 900
+  },
+  "marketState": {
+    "marketAddress": "0x5f6Ec7c1d10ce9B1Af9884F25a7a920D94eFb89d",
+    "outcomeToken": "0xB52c5934113Af5c0Bb20eb3C72290C8215f755b9",
+    "yesId": "4084430430699711941661172540721307390542943882180056147836640061040896",
+    "noId": "4084430430699711941661172540721307390542943882180056147836640061040897",
+    "pool": "0x977FfC6129184D2B8311cc8D025a60369bf7059C",
+    "nonce": "41",
+    "collateral": "0x70a86D8842FB63C4Ad2b7cdddF530eBf1BB25d8E",
+    "status": 1,
+    "backing": "1500000000",
+    "finalized": false,
+    "expiry": "1788894900",
+    "decimals": 6,
+    "winningOutcome": 0,
+    "isResolved": false,
+    "isVoided": false
+  },
+  "before": {
+    "native": "49998740000000000000",
+    "collateral": "500000000"
+  },
+  "steps": [
+    {
+      "action": "fund-fixture-maker-STT",
+      "hash": "0x7aa58833a7b0d426dfb0b069641db95f17ec746b6fa931d18033b525ac9d5454",
+      "block": "483213711",
+      "status": "success",
+      "gasUsed": "421000"
+    },
+    {
+      "action": "fund-fixture-maker-tUSDC",
+      "hash": "0x945580da18c4e754819464abfff191d1ab047fd2cc9c0bad5a40601218cbdc03",
+      "block": "483213731",
+      "status": "success",
+      "gasUsed": "262180"
+    },
+    {
+      "action": "mint-complete-set",
+      "hash": "0xd78956e99ef7f3f8d86c88bd985a47e8f4bb7db0bedaf75351408a7520939088",
+      "block": "483213780",
+      "status": "success",
+      "gasUsed": "587605"
+    },
+    {
+      "action": "place-maker",
+      "hash": "0x0fb0bf42d2288c4f774d80113ed222b9a5588806ba8b0e4ed96a6e7a3c6e57fe",
+      "block": "483213814",
+      "status": "success",
+      "gasUsed": "499958",
+      "details": {
+        "orderId": "129127208515966913187",
+        "price": "661000",
+        "quantity": "2000000"
+      }
+    },
+    {
+      "action": "take-liquidity",
+      "hash": "0xaf88317e84a5673eca810340d7a079d57e5555f49b486bc09f401d183aa722cc",
+      "block": "483213847",
+      "status": "success",
+      "gasUsed": "828682",
+      "details": {
+        "requested": "1000000",
+        "filled": "1000000",
+        "fills": [
+          {
+            "takerOrderId": "147573952589676464804",
+            "makerOrderId": "55340232221128706718",
+            "quantityFilled": "1000000",
+            "takerRemainingQuantity": "0",
+            "makerRemainingQuantity": "199000000",
+            "fillPrice": "644000"
+          }
+        ]
+      }
+    },
+    {
+      "action": "cancel-maker-remainder",
+      "hash": "0x566ace637da42a6a8be96be73e41e604ff7a344c9e3830443ee01ab33cdc75a1",
+      "block": "483213858",
+      "status": "success",
+      "gasUsed": "144574"
+    },
+    {
+      "action": "redeem-owner-0",
+      "hash": "0xe33eefd4b22608b7eb0063fb7f89958185fdff3da17e44a8faf7d65502dcb42e",
+      "block": "483217572",
+      "status": "success",
+      "gasUsed": "472707",
+      "details": {
+        "amount": "1000000",
+        "voided": false
+      }
+    },
+    {
+      "action": "redeem-fixture-maker-0",
+      "hash": "0xe3d273d36451ad110ed0681f85ab107c7fa83e83e8a3e4a5b085443aaea1580a",
+      "block": "483217618",
+      "status": "success",
+      "gasUsed": "272707",
+      "details": {
+        "amount": "2000000",
+        "voided": false
+      }
+    }
+  ],
+  "state": "redeemed",
+  "after": {
+    "owner": {
+      "native": "47983711602000000000",
+      "collateral": "497356000"
+    },
+    "maker": {
+      "native": "1986287438000000000",
+      "collateral": "3000000"
+    }
+  },
+  "reconciliation": [
+    {
+      "wallet": "0xF619dDB6d0c52Cc083aA9FECe2943D04F671Bf7F",
+      "expected": "1000000",
+      "actual": "1000000",
+      "matched": true
+    },
+    {
+      "wallet": "0x1D105dCE91D008fE978B4b5c5938fB5775b7830d",
+      "expected": "2000000",
+      "actual": "2000000",
+      "matched": true
+    }
+  ]
+}

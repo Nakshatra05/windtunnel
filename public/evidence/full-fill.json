@@ -1,0 +1,441 @@
+{
+  "payload": {
+    "schema": "windtunnel.suite.v1",
+    "revision": "uncommitted",
+    "sdk": "0.28.1",
+    "reports": [
+      {
+        "report": {
+          "schema": "windtunnel.report.v1",
+          "engine": "1.0.0",
+          "provenance": "synthetic",
+          "scenario": "partial-fill",
+          "parameters": {
+            "requested": 10,
+            "liquidity": 10,
+            "seed": 42,
+            "fault": true
+          },
+          "fingerprint": "wt-2fd1108c",
+          "reference": {
+            "mode": "reference",
+            "frames": [
+              {
+                "event": {
+                  "seq": 0,
+                  "time": 276,
+                  "kind": "discover",
+                  "label": "Window discovered",
+                  "detail": "Synthetic BTC window A · fixture pool 01",
+                  "data": {
+                    "market": "fixture:BTC-window-A"
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 0,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 0,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 1,
+                  "time": 470,
+                  "kind": "request",
+                  "label": "Limit order accepted",
+                  "detail": "10 Up contracts requested at 0.60 fixture units.",
+                  "data": {
+                    "requested": 10
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 0,
+                  "open": 10,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 0,
+                  "open": 10,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 2,
+                  "time": 908,
+                  "kind": "fill",
+                  "label": "Full fill received",
+                  "detail": "10 confirmed filled; 0 remain open.",
+                  "data": {
+                    "filled": 10,
+                    "requested": 10
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 3,
+                  "time": 1169,
+                  "kind": "reconcile",
+                  "label": "Position reconciled",
+                  "detail": "Compare the bot ledger against the independent fill tape.",
+                  "data": {},
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 4,
+                  "time": 1506,
+                  "kind": "cancel",
+                  "label": "Remainder cancelled",
+                  "detail": "0 unfilled contracts cancelled.",
+                  "data": {
+                    "quantity": 0
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 5,
+                  "time": 1668,
+                  "kind": "reconcile",
+                  "label": "Final ledger checked",
+                  "detail": "No phantom position and no forgotten open orders.",
+                  "data": {},
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              }
+            ],
+            "passed": true,
+            "firstFailure": null,
+            "final": {
+              "position": 10,
+              "open": 0,
+              "cancelled": 0,
+              "market": "fixture:BTC-window-A",
+              "credits": 0,
+              "pending": false,
+              "seen": []
+            }
+          },
+          "repaired": {
+            "mode": "repaired",
+            "frames": [
+              {
+                "event": {
+                  "seq": 0,
+                  "time": 276,
+                  "kind": "discover",
+                  "label": "Window discovered",
+                  "detail": "Synthetic BTC window A · fixture pool 01",
+                  "data": {
+                    "market": "fixture:BTC-window-A"
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 0,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 0,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 1,
+                  "time": 470,
+                  "kind": "request",
+                  "label": "Limit order accepted",
+                  "detail": "10 Up contracts requested at 0.60 fixture units.",
+                  "data": {
+                    "requested": 10
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 0,
+                  "open": 10,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 0,
+                  "open": 10,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 2,
+                  "time": 908,
+                  "kind": "fill",
+                  "label": "Full fill received",
+                  "detail": "10 confirmed filled; 0 remain open.",
+                  "data": {
+                    "filled": 10,
+                    "requested": 10
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 3,
+                  "time": 1169,
+                  "kind": "reconcile",
+                  "label": "Position reconciled",
+                  "detail": "Compare the bot ledger against the independent fill tape.",
+                  "data": {},
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 4,
+                  "time": 1506,
+                  "kind": "cancel",
+                  "label": "Remainder cancelled",
+                  "detail": "0 unfilled contracts cancelled.",
+                  "data": {
+                    "quantity": 0
+                  },
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              },
+              {
+                "event": {
+                  "seq": 5,
+                  "time": 1668,
+                  "kind": "reconcile",
+                  "label": "Final ledger checked",
+                  "detail": "No phantom position and no forgotten open orders.",
+                  "data": {},
+                  "injected": false
+                },
+                "ledger": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "expected": {
+                  "position": 10,
+                  "open": 0,
+                  "cancelled": 0,
+                  "market": "fixture:BTC-window-A",
+                  "credits": 0,
+                  "pending": false,
+                  "seen": []
+                },
+                "violations": []
+              }
+            ],
+            "passed": true,
+            "firstFailure": null,
+            "final": {
+              "position": 10,
+              "open": 0,
+              "cancelled": 0,
+              "market": "fixture:BTC-window-A",
+              "credits": 0,
+              "pending": false,
+              "seen": []
+            }
+          },
+          "limitations": [
+            "Synthetic application fault fixtures, not a matching-engine simulation.",
+            "Passing does not establish security, profitability, queue priority or mainnet readiness.",
+            "Faulty references are WindTunnel examples, not claims about the DreamDEX SDK."
+          ]
+        }
+      }
+    ]
+  },
+  "sha256": "c333b73c8330b7a951c17c30fd5c1e05bc401f481b20be008df569b513cb1559",
+  "hashScope": "UTF-8 JSON.stringify(payload)"
+}
