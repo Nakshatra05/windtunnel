@@ -538,7 +538,7 @@ export default function Lab() {
                   ].map(({ frame, fixed }) => (
                     <div
                       key={String(fixed)}
-                      className={`bot ${fixed ? 'fixed' : 'broken'}`}
+                      className={`bot ${fixed ? 'repaired-bot' : 'broken'}`}
                     >
                       <div className="bot-heading">
                         {fixed ? (

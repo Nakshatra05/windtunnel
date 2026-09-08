@@ -348,7 +348,7 @@
   color: #20211d !important;
 }
 .brand svg,
-.fixed .readout strong,
+.repaired-bot .readout strong,
 .live-stats b,
 .prose a,
 .back-link {
@@ -362,7 +362,7 @@
 .bot {
   border: 2px solid #20211d !important;
 }
-.bot.fixed {
+.bot.repaired-bot {
   border: 2px solid #20211d;
 }
 .nav-tabs [data-active] {
@@ -1056,3 +1056,7 @@
     font-size: 10px;
   }
 }
+
+.setup [data-slot="slider-track"] { height: 6px; width: 100%; background: #c5c9b5; border: 1px solid #667044; }
+.setup [data-slot="slider-range"] { height: 100%; background: #6b8525; }
+.setup [data-slot="slider-thumb"] { width: 15px; height: 15px; border: 2px solid #20211d; background: #d8f36a; }
