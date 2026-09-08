@@ -16,6 +16,27 @@ export default function Submission() {
         Reproduce the failure. Inspect the repair. Verify the integration.
       </p>
       <section className="panel prose">
+        <h2>Start here: the judge’s quick path</h2>
+        <p>
+          Reproduce a failure, change its conditions, then inspect the real
+          testnet evidence. No wallet or setup required.
+        </p>
+        <div className="judge-links">
+          <a className="button primary" href="/lab?tour=1">
+            Take the guided demo →
+          </a>
+          <a className="button secondary" href="/lab?tab=testnet">
+            Inspect the receipts ↗
+          </a>
+          <a
+            className="button secondary"
+            href="https://github.com/Nakshatra05/windtunnel"
+          >
+            Read the source ↗
+          </a>
+        </div>
+      </section>
+      <section className="panel prose">
         <h2>The problem</h2>
         <p>
           A trading bot can choose the correct direction and still operate
@@ -36,11 +57,33 @@ export default function Submission() {
           The replay engine, failure fixtures, ledger invariants, browser
           comparison interface and CLI are original WindTunnel code. The
           protocol integration follows the MIT-licensed DreamDEX starter and SDK
-          documentation, with a separate maker wallet to produce genuine fills.
+          documentation, with controlled order placement and public-liquidity
+          execution.
         </p>
       </section>
       <Evidence />
-      <section className="panel prose"><h2>2:30 project walkthrough</h2><p>A narrated, captioned visualization of actual replay reports and testnet receipts.</p><video controls preload="metadata" style={{width:"100%",borderRadius:8}} aria-label="WindTunnel narrated report walkthrough"><source src="/demo/windtunnel-demo.mp4?v=voiceover-1" type="video/mp4"/></video><p>Captions are included in the video. See DEMO_SCRIPT.md in the repository for the text outline.</p></section>
+      <section className="panel prose">
+        <h2>2:30 project walkthrough</h2>
+        <p>
+          A narrated, captioned visualization of actual replay reports and
+          testnet receipts.
+        </p>
+        <video
+          controls
+          preload="metadata"
+          style={{ width: '100%', borderRadius: 8 }}
+          aria-label="WindTunnel narrated report walkthrough"
+        >
+          <source
+            src="/demo/windtunnel-demo.mp4?v=voiceover-1"
+            type="video/mp4"
+          />
+        </video>
+        <p>
+          Captions are included in the video. See DEMO_SCRIPT.md in the
+          repository for the text outline.
+        </p>
+      </section>
       <section className="panel prose">
         <h2>Architecture</h2>
         <pre>
@@ -53,8 +96,9 @@ export default function Submission() {
         <p>
           Synthetic scenarios test application behavior. They are not full
           matching-engine replays, security audits or profitability claims. The
-          testnet run uses two controlled wallets; public liquidity can also match the take order.
-          External user adoption has not yet been validated.
+          testnet run uses two controlled wallets; public liquidity can also
+          match the take order. External user adoption has not yet been
+          validated.
         </p>
         <h2>Reproduce</h2>
         <pre>

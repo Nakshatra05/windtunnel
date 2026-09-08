@@ -21,6 +21,10 @@ npm run dev
 
 Open the Local URL printed by the development server. `npm run build` creates the Cloudflare Worker deployment. `npm run build:vercel` builds the same app with Next.js for Vercel; `vercel.json` selects this build automatically. The UI uses React and installed Shadcn controls. The public web app requires no signing secrets or environment variables.
 
+## Judge-friendly walkthrough
+
+Open `/lab?tour=1` for five guided checkpoints: partial fill, full liquidity, rollover, recovery and real receipts. The lab can evaluate all scenarios at once, jump to the first mismatch, and copy a link that restores the active inputs and selected event. Shared links are validated before reaching the engine.
+
 ## Reproduce a failure
 
 ```sh
@@ -44,6 +48,8 @@ All fixtures are explicitly synthetic. The seed controls reproducible event timi
 ## Bring a strategy
 
 Implement the `Strategy` interface from `lib/engine.ts`: `{ name, reduce(state, event) }`. It receives a cloned event and ledger, returns a new ledger, and cannot mutate the oracle's tape. The independent oracle derives expected quantities from venue events. The fixture reducers are deliberately small integration references, not trading alpha.
+
+The evidence view can also re-read all eight recorded receipt statuses and block numbers from the public RPC (`/api/verify`). This live check is separate from the recorded historical balance reconciliation and does not claim to recalculate it.
 
 ## Testnet integration
 

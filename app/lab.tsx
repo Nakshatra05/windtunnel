@@ -22,6 +22,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import Evidence from './evidence';
+import Tour from './tour';
+import { parseReplayLink, replayPath } from '@/lib/replay-link';
 import {
   DEFAULT_PARAMETERS,
   SCENARIOS,
@@ -54,6 +56,9 @@ interface Live {
   error?: string;
 }
 export default function Lab() {
+  const [tour, setTour] = useState<number | null>(null);
+  const [shareUrl, setShareUrl] = useState('');
+  const [suite, setSuite] = useState<ReturnType<typeof runLab>[] | null>(null);
   const [scenario, setScenario] = useState<ScenarioId>('partial-fill'),
     [params, setParams] = useState<Parameters>(DEFAULT_PARAMETERS),
     [active, setActive] = useState<Parameters>(DEFAULT_PARAMETERS),
@@ -70,6 +75,52 @@ export default function Lab() {
     before = report.reference.frames[index],
     after = report.repaired.frames[index];
   useEffect(() => {
+    const initial = parseReplayLink(window.location.search);
+    if (initial.tour) {
+      tourStep(0);
+      return;
+    }
+    setScenario(initial.scenario);
+    setParams(initial.parameters);
+    setActive(initial.parameters);
+    setCursor(initial.frame);
+    setTab(initial.tab);
+  }, []);
+  function tourStep(step: number) {
+    setSuite(null);
+    setShareUrl('');
+    const id: ScenarioId =
+      step === 2 ? 'rollover' : step === 3 ? 'recovery' : 'partial-fill';
+    const p = {
+      ...DEFAULT_PARAMETERS,
+      ...(step === 1 ? { liquidity: 10 } : {}),
+    };
+    const r = runLab(id, p);
+    const target =
+      step === 0
+        ? r.reference.frames.findIndex((f) => f.event.kind === 'fill')
+        : step === 2
+          ? (r.reference.firstFailure ?? 0)
+          : r.reference.frames.length - 1;
+    setScenario(id);
+    setParams(p);
+    setActive(p);
+    setCursor(target);
+    setPlaying(false);
+    setTour(step);
+    setTab(step === 4 ? 'testnet' : 'lab');
+  }
+  async function shareReplay() {
+    const url = window.location.origin + replayPath(scenario, active, index);
+    setShareUrl(url);
+    try {
+      await navigator.clipboard.writeText(url);
+      setNotice('Replay link copied. It restores these inputs and this event.');
+    } catch {
+      setNotice('Select and copy the replay link below.');
+    }
+  }
+  useEffect(() => {
     if (!playing) return;
     const timer = setInterval(
       () =>
@@ -85,12 +136,16 @@ export default function Lab() {
     return () => clearInterval(timer);
   }, [playing, report]);
   function select(id: ScenarioId) {
+    setShareUrl('');
+    setTour(null);
     setScenario(id);
     setCursor(0);
     setPlaying(false);
     setTab('lab');
   }
   function run() {
+    setShareUrl('');
+    setTour(null);
     setActive({ ...params });
     setCursor(0);
     setPlaying(true);
@@ -154,7 +209,10 @@ export default function Lab() {
       <Tabs
         className="workspace"
         value={tab}
-        onValueChange={(v) => setTab(String(v))}
+        onValueChange={(v) => {
+          setTab(String(v));
+          setTour(null);
+        }}
       >
         <aside className="sidebar">
           <div className="eyebrow">WORKSPACE</div>
@@ -207,6 +265,9 @@ export default function Lab() {
           </div>
         </aside>
         <main className="main">
+          {tour !== null && (
+            <Tour step={tour} onStep={tourStep} onClose={() => setTour(null)} />
+          )}
           <TabsContent value="lab">
             <div className="breadcrumb">
               Workspace <ChevronRight size={13} /> Replay lab{' '}
@@ -223,11 +284,128 @@ export default function Lab() {
                   Same failure. Two implementations. See exactly what changes.
                 </p>
               </div>
-              <button className="button secondary" onClick={exportReport}>
-                <Download size={16} />
-                Export report
+              <div className="lab-actions">
+                <button className="button secondary" onClick={shareReplay}>
+                  Share replay
+                </button>
+                <button className="button secondary" onClick={exportReport}>
+                  <Download size={16} />
+                  Export report
+                </button>
+              </div>
+            </div>
+            {shareUrl && (
+              <div className="share-result">
+                <label htmlFor="replay-link">Reproduce this exact replay</label>
+                <input
+                  id="replay-link"
+                  readOnly
+                  value={shareUrl}
+                  onFocus={(e) => e.currentTarget.select()}
+                />
+                <button
+                  onClick={() => setShareUrl('')}
+                  aria-label="Hide replay link"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            )}
+            <div className="lab-quick-actions">
+              <button onClick={() => tourStep(0)}>
+                <Play size={15} /> Take the guided demo
+              </button>
+              <button
+                onClick={() => {
+                  setPlaying(false);
+                  setTour(null);
+                  setCursor(
+                    report.reference.firstFailure ??
+                      report.reference.frames.length - 1,
+                  );
+                  setNotice(
+                    report.reference.firstFailure === null
+                      ? 'No reference failure for these inputs.'
+                      : 'Jumped to the first ledger mismatch.',
+                  );
+                }}
+              >
+                <ArrowRight size={15} />{' '}
+                {report.reference.firstFailure === null
+                  ? 'View final result'
+                  : 'Jump to first failure'}
+              </button>
+              <button
+                onClick={() => {
+                  setSuite(SCENARIOS.map((s) => runLab(s.id, active)));
+                  setNotice(
+                    'All three scenarios evaluated with the active parameters.',
+                  );
+                }}
+              >
+                <ShieldCheck size={15} /> Run all scenarios
               </button>
             </div>
+            {suite && (
+              <section
+                className="suite-results"
+                aria-label="Scenario suite results"
+              >
+                <div className="suite-heading">
+                  <div>
+                    <h2>Three scenarios. One reproducible suite.</h2>
+                    <p>
+                      Snapshot: {suite[0].parameters.requested} requested ·{' '}
+                      {suite[0].parameters.liquidity} available · seed{' '}
+                      {suite[0].parameters.seed} · faults{' '}
+                      {suite[0].parameters.fault ? 'on' : 'off'}
+                    </p>
+                  </div>
+                  <button
+                    aria-label="Close suite results"
+                    onClick={() => setSuite(null)}
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+                <div className="suite-cards">
+                  {suite.map((r) => (
+                    <button
+                      key={r.scenario}
+                      onClick={() => {
+                        setScenario(r.scenario);
+                        setActive(r.parameters);
+                        setParams(r.parameters);
+                        setCursor(
+                          r.reference.firstFailure ??
+                            r.reference.frames.length - 1,
+                        );
+                        setPlaying(false);
+                        setTour(null);
+                      }}
+                    >
+                      <strong>
+                        {SCENARIOS.find((s) => s.id === r.scenario)!.name}
+                      </strong>
+                      <span className={r.reference.passed ? 'pass' : 'fail'}>
+                        Reference: {r.reference.passed ? 'PASS' : 'FAIL'}
+                      </span>
+                      <span className={r.repaired.passed ? 'pass' : 'fail'}>
+                        Repaired: {r.repaired.passed ? 'PASS' : 'FAIL'}
+                      </span>
+                      <small>
+                        {
+                          r.repaired.frames.filter((f) => !f.violations.length)
+                            .length
+                        }
+                        /{r.repaired.frames.length} repaired events consistent{' '}
+                        <ArrowRight size={12} />
+                      </small>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
             <div className="summary">
               <span>
                 <i /> Engine ready
@@ -471,6 +649,8 @@ export default function Lab() {
                       aria-pressed={i === index}
                       className={`${i <= index ? 'visited' : ''} ${f.event.injected ? 'injected' : ''} ${i === index ? 'current' : ''}`}
                       onClick={() => {
+                        setTour(null);
+                        setShareUrl('');
                         setCursor(i);
                         setPlaying(false);
                       }}
@@ -484,6 +664,8 @@ export default function Lab() {
                   <button
                     aria-label={playing ? 'Pause' : 'Play'}
                     onClick={() => {
+                      setTour(null);
+                      setShareUrl('');
                       if (index === report.reference.frames.length - 1)
                         setCursor(0);
                       setPlaying((p) => !p);
@@ -494,6 +676,8 @@ export default function Lab() {
                   <button
                     aria-label="Reset replay"
                     onClick={() => {
+                      setTour(null);
+                      setShareUrl('');
                       setCursor(0);
                       setPlaying(false);
                     }}
@@ -539,7 +723,7 @@ export default function Lab() {
               Passing these scenarios does not certify security or
               profitability.<span>Replay fingerprint · non-cryptographic</span>
             </footer>
-            <span role="status" className="sr-only">
+            <span role="status" className="lab-notice">
               {notice}
             </span>
           </TabsContent>
