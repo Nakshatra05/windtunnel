@@ -1,0 +1,8 @@
+.env*
+.git
+.wrangler
+dist
+node_modules
+reports
+outputs
+work

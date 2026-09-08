@@ -3,7 +3,7 @@ import Evidence from '../evidence';
 export default function Submission() {
   return (
     <main className="submission-page">
-      <Link href="/" className="back-link">
+      <Link href="/lab" className="back-link">
         ← Open the replay lab
       </Link>
       <div className="eyebrow lime">
@@ -53,7 +53,7 @@ export default function Submission() {
         <p>
           Synthetic scenarios test application behavior. They are not full
           matching-engine replays, security audits or profitability claims. The
-          testnet trades are deliberately arranged between two fixture wallets.
+          testnet run uses two controlled wallets; public liquidity can also match the take order.
           External user adoption has not yet been validated.
         </p>
         <h2>Reproduce</h2>

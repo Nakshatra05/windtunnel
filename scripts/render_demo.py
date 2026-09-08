@@ -11,7 +11,7 @@ reports=json.loads((ROOT/'public/evidence/synthetic-suite.json').read_text())['p
 runs={r['report']['scenario']:r['report'] for r in reports}
 evidence=json.loads((ROOT/'public/evidence/lifecycle.json').read_text())
 W,H=1280,720
-BG='#101512'; PANEL='#1b2519'; EDGE='#35452c'; FG='#eff3e8'; MUTED='#a6b699'; GREEN='#c3ef82'; RED='#e9a587'
+BG='#f5f1e7'; PANEL='#fffdf5'; EDGE='#20211d'; FG='#20211d'; MUTED='#53584a'; GREEN='#4c6519'; RED='#a52b1d'
 font_root=Path('C:/Windows/Fonts')
 def font(size,bold=False,mono=False):return ImageFont.truetype(str(font_root/('consola.ttf' if mono else 'arialbd.ttf' if bold else 'arial.ttf')),size)
 def txt(d,pos,text,size=22,color=FG,bold=False,mono=False):d.text(pos,str(text),font=font(size,bold,mono),fill=color)
@@ -30,7 +30,7 @@ def draw_run(id,local,duration,second):
  im,d=base('Synthetic fixture · '+id,a['event']['detail'],second)
  txt(d,(48,140),names[id],38,FG,True);txt(d,(48,193),f"Event {idx+1}/{len(frames)}  |  T + {a['event']['time']/1000:.3f}s  |  Seed 42",18,MUTED,mono=True)
  for x,frame,name,color in [(48,a,'Reference bot',RED),(664,b,'Repaired bot',GREEN)]:
-  d.rounded_rectangle((x,240,x+568,516),radius=10,fill=PANEL,outline=EDGE,width=2)
+  d.rounded_rectangle((x,240,x+568,516),radius=0,fill=PANEL,outline=EDGE,width=2)
   txt(d,(x+24,263),name,24,FG,True);txt(d,(x+432,269),'FAIL' if frame['violations'] else 'PASS',18,RED if frame['violations'] else GREEN,mono=True)
   field='credits' if id=='recovery' else 'market' if id=='rollover' else 'position';value=frame['ledger'][field];expected=frame['expected'][field]
   if field=='market':value=value[-1:];expected=expected[-1:]

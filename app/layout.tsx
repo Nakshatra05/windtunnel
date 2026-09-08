@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import './landing.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -14,6 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'WindTunnel — DreamDEX Execution Lab',
+  icons: { icon: '/favicon.svg' },
   description:
     'Reproduce execution failures and verify DreamDEX Event Contract integrations on Somnia.',
 };

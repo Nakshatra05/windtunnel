@@ -4,7 +4,7 @@
 
 Repository: https://github.com/Nakshatra05/windtunnel
 
-Built for the Somnia × DreamDEX Event Contracts Hackathon. The application opens directly into a deterministic replay lab; `/submission` contains the project brief and real transaction trail.
+Built for the Somnia × DreamDEX Event Contracts Hackathon. The landing page introduces the project; `/lab` opens the deterministic replay lab and `/submission` contains the project brief, walkthrough and real transaction trail.
 
 ## Run
 
@@ -17,7 +17,7 @@ npm run typecheck
 npm run dev
 ```
 
-Open the Local URL printed by the development server. `npm run build` creates the Cloudflare Worker deployment. The UI uses the Sites/Vinext starter, React and installed Shadcn controls.
+Open the Local URL printed by the development server. `npm run build` creates the Cloudflare Worker deployment. `npm run build:vercel` builds the same app with Next.js for Vercel; `vercel.json` selects this build automatically. The UI uses React and installed Shadcn controls. The public web app requires no signing secrets or environment variables.
 
 ## Reproduce a failure
 
