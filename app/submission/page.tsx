@@ -40,7 +40,7 @@ export default function Submission() {
         </p>
       </section>
       <Evidence />
-      <section className="panel prose"><h2>2:30 project walkthrough</h2><p>A captioned visualization of actual replay reports and testnet receipts.</p><video controls preload="metadata" style={{width:"100%",borderRadius:8}} aria-label="WindTunnel captioned report walkthrough"><source src="/demo/windtunnel-demo.mp4" type="video/mp4"/></video><p>Captions are included in the video. See DEMO_SCRIPT.md in the repository for the text outline.</p></section>
+      <section className="panel prose"><h2>2:30 project walkthrough</h2><p>A narrated, captioned visualization of actual replay reports and testnet receipts.</p><video controls preload="metadata" style={{width:"100%",borderRadius:8}} aria-label="WindTunnel narrated report walkthrough"><source src="/demo/windtunnel-demo.mp4?v=voiceover-1" type="video/mp4"/></video><p>Captions are included in the video. See DEMO_SCRIPT.md in the repository for the text outline.</p></section>
       <section className="panel prose">
         <h2>Architecture</h2>
         <pre>
